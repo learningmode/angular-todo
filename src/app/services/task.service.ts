@@ -4,6 +4,13 @@ import { Observable,of } from 'rxjs';
 import {TASKS} from '../mock-tasks';
 import {Task} from '../Task';
 
+const httpOptions ={
+  headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +27,11 @@ export class TaskService {
   deleteTheTask(task:Task):Observable<Task>{
     const url = `${this.httpUrl}/${task.id}`;
     return this.http.delete<Task>(url);
+  }
+
+  updateTaskReminder(task:Task): Observable<Task>{
+    const url =`${this.httpUrl}/${task.id}`;
+    return this.http.put<Task>(url,task,httpOptions);
   }
 
 }
