@@ -24,6 +24,10 @@ export class TaskService {
     return this.http.get<Task[]>(this.httpUrl);
   }
 
+  addTask(task:Task):Observable<Task>{
+    return this.http.post<Task>(this.httpUrl,task,httpOptions)
+  }
+
   deleteTheTask(task:Task):Observable<Task>{
     const url = `${this.httpUrl}/${task.id}`;
     return this.http.delete<Task>(url);
